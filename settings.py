@@ -21,6 +21,7 @@ DOMAIN          = { 'vote': models.vote }
 XML             = False
 # Allow CORS
 X_DOMAINS       = "*"
+X_HEADERS       = "X-Requested-With, content-type"
 # Disable pagination
 PAGINATION      = False
 

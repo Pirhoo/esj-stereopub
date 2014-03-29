@@ -44,7 +44,7 @@ invite à consulter [la documentation de Eve](http://python-eve.org/features.htm
 L'API vous permet d'envoyer des votes sans authentification avec une limite 
 drastique pour chaque IP de 60 votes par plage de 20 minutes.
 
-**Cette limitation permet d'éviter les votes abusifs et peu au besoin être élevée.**
+**Cette limitation permet d'éviter les votes abusifs et peut au besoin être élevée.**
 
 Pour envoyer un vote, utilisez le code suivant depuis votre controlleur :
 
