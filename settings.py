@@ -9,13 +9,17 @@ except ImportError:
 import models
 
 # Deactivvate debug by default
-DEBUG   = bool(environ.get('DEBUG', False))
+DEBUG          = bool(environ.get('DEBUG', False))
 # Deactivate HATEOAS items
-HATEOAS = False
+HATEOAS        = False
+# Drastic rate limit to avoid flooding
+RATE_LIMIT_GET = (5, 60*1)
 # Application models
-DOMAIN  = {
-    'vote': models.vote,
-}
+DOMAIN         = { 'vote': models.vote }
+# Disable xml support
+XML            = False
+# Allow CORS
+X_DOMAINS      = "*"
 
 # Redis To Go
 redis_url = environ.get('REDISTOGO_URL')
@@ -26,15 +30,14 @@ if redis_url:
     REDIS_PORT     = url.port
     REDIS_PASSWORD = url.password
 
-
 # Mongolab
 mongolab_uri = environ.get('MONGOLAB_URI')
 if mongolab_uri:
     url = urlparse(mongolab_uri)
     # Register redis configuration from MONGOLAB_URI    
-    MONGO_URI        = mongolab_uri
-    MONGODB_USER     = url.username
-    MONGODB_PASSWORD = url.password
-    MONGODB_HOST     = url.hostname
-    MONGODB_PORT     = url.port
-    MONGODB_DB       = url.path[1:]
+    MONGO_URI      = mongolab_uri
+    MONGO_PORT     = url.username
+    MONGO_USERNAME = url.password
+    MONGO_HOST     = url.hostname
+    MONGO_PASSWORD = url.port
+    MONGO_DBNAME   = url.path[1:]
