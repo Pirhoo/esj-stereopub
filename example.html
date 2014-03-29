@@ -15,7 +15,7 @@
 
         function VoteCtrl($http, $scope) {
 
-            $scope.API_URL = "http:/localhost:5000/vote"
+            $scope.API_URL = "http://edj-stereopub.herokuapp.com/vote"
 
             $scope.load = function() {                
                 $http.get($scope.API_URL).success(function(data) {
