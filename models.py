@@ -5,6 +5,7 @@ vote = {
     # Allow getting resources and create new ones
     'resource_methods': ['GET', 'POST', 'DELETE'],    
     'item_methods': ['GET', 'DELETE'],
+    # Disable authentication for this methods
     'public_methods': ['GET', 'POST'],
     'public_item_methods': ['GET'],
     # Vote schema
