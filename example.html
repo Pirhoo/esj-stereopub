@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="http://bootswatch.com/superhero/bootstrap.css">    
 
     <script type="text/javascript">
-        window.API_URL = "http://edj-stereopub.herokuapp.com/vote"
+        window.API_URL = "http:/edj-stereopub.herokuapp.com/vote"
 
         function VoteCtrl($http, $scope) {
 
@@ -21,7 +21,6 @@
                     $scope.votes = data 
                 });
             }
-
 
             $scope.submit = function() {                
                 var vote = {
@@ -32,7 +31,7 @@
                 }
 
                 $http.post(API_URL, vote).success(function(data) {
-                    $scope.created = data 
+                    $scope.created = data;
                     $scope.load();
                 });
             };
@@ -50,12 +49,10 @@
         
         <h2>Envoyer un vote</h2>
         <button class="btn btn-default" ng-hide="created" ng-click="submit()">Voter!</button>            
-        <div ng-show="created">
-            <pre>{{created|json}}</pre>
-        </div>
+        <div class="alert alert-success" ng-show="created">Le vote a été envoyé!</div>
 
         <div ng-show="votes">
-            <h2>Consulter les votes - {{votes.length}} vote(s)</h2>
+            <h2>Consulter les votes <span class="label label-info pull-right">{{votes.length}} vote{{ votes.length>1 ? "s" : ""}}</span></h2>
             <ul class="list-unstyled">
                 <li ng-repeat="vote in votes">
                     <pre>{{vote|json}}</pre>
