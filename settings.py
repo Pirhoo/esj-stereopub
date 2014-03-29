@@ -9,23 +9,25 @@ except ImportError:
 import models
 
 # Deactivvate debug by default
-DEBUG          = bool(environ.get('DEBUG', False))
+DEBUG           = bool(environ.get('DEBUG', False))
 # Deactivate HATEOAS items
-HATEOAS        = False
+HATEOAS         = False
 # Drastic rate limit to avoid flooding
-RATE_LIMIT_GET = (5, 60*1)
+# 60 post requests in a window of 20 minutes
+RATE_LIMIT_POST = (60, 60*20)
 # Application models
-DOMAIN         = { 'vote': models.vote }
+DOMAIN          = { 'vote': models.vote }
 # Disable xml support
-XML            = False
+XML             = False
 # Allow CORS
-X_DOMAINS      = "*"
+X_DOMAINS       = "*"
 
 # Redis To Go
 redis_url = environ.get('REDISTOGO_URL')
 if redis_url:
     url = urlparse(redis_url)
     # Register redis configuration from REDISTOGO_URL
+    REDIS_URI      = redis_url
     REDIS_HOST     = url.hostname
     REDIS_PORT     = url.port
     REDIS_PASSWORD = url.password

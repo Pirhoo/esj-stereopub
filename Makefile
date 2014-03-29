@@ -4,10 +4,12 @@ PWD = `pwd`
 
 install:
 	make virtualenv
+	make pip
 
 virtualenv:
 	virtualenv venv --no-site-packages --distribute
-	# Install pip packages
+
+pip:
 	. $(PWD)/.env; pip install -r requirements.txt --allow-all-external || . $(PWD)/.env; pip install -r requirements.txt
 
 run:
