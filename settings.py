@@ -24,6 +24,9 @@ X_DOMAINS       = "*"
 X_HEADERS       = "X-Requested-With, content-type"
 # Disable pagination
 PAGINATION      = False
+# Credidential
+USERNAME        = environ.get('USERNAME', None)
+PASSWORD        = environ.get('PASSWORD', None)
 
 # Redis To Go
 redis_url = environ.get('REDISTOGO_URL')
