@@ -7,17 +7,19 @@ vote = {
     # Vote schema
     'schema':  {
         'media': {
-            'type': 'integer'
+            'type': 'integer',
+            'required': True
         },
         'sex': {
-            'type': 'list',
+            'type': 'string',
             'allowed': ["male", "female"],
         },
         'age': {
             'type': 'integer'
         },
         'is_sexist': {
-            'type': 'boolean'
+            'type': 'boolean',
+            'required': True
         }
     }
 }
