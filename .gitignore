@@ -4,4 +4,3 @@ venv
 .DS_Store
 .env_dev
 *.log
-index.html

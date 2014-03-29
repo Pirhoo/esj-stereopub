@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <title>API Stéréopub - Exemple</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+    
+
+    <link rel="stylesheet" href="http://bootswatch.com/superhero/bootstrap.css">    
+
+    <script type="text/javascript">
+        window.API_URL = "http://edj-stereopub.herokuapp.com/vote"
+
+        function VoteCtrl($http, $scope) {
+
+            $scope.load = function() {                
+                $http.get(API_URL + '?where=age==25').success(function(data) {
+                    $scope.votes = data 
+                });
+            }
+
+
+            $scope.submit = function() {                
+                var vote = {
+                    sex      : "male", // Le sexe de l'utilisateur
+                    age      : 25,     // Son age
+                    media    : 10,     // L'identifiant UNIQUE du media (image, vidéo) évalué
+                    is_sexist: true    // La valeur du vote ("true" si le media est sexiste, "false" sinon)
+                }
+
+                $http.post(API_URL, vote).success(function(data) {
+                    $scope.created = data 
+                    $scope.load();
+                });
+            };
+
+            $scope.load();
+        }
+
+        VoteCtrl.$inject = ["$http", "$scope"]
+    </script>
+</head>
+
+<body ng-app>
+    <div class="container" ng-controller="VoteCtrl">
+        <h1>API Stéréopub</h1>
+        
+        <h2>Envoyer un vote</h2>
+        <button class="btn btn-default" ng-hide="created" ng-click="submit()">Voter!</button>            
+        <div ng-show="created">
+            <pre>{{created|json}}</pre>
+        </div>
+
+        <div ng-show="votes">
+            <h2>Consulter les votes - {{votes.length}} vote(s)</h2>
+            <ul class="list-unstyled">
+                <li ng-repeat="vote in votes">
+                    <pre>{{vote|json}}</pre>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</body>
+</html>
