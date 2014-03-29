@@ -21,6 +21,8 @@ DOMAIN          = { 'vote': models.vote }
 XML             = False
 # Allow CORS
 X_DOMAINS       = "*"
+# Disable pagination
+PAGINATION      = False
 
 # Redis To Go
 redis_url = environ.get('REDISTOGO_URL')
