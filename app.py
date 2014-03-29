@@ -12,7 +12,7 @@ eve_conf = {}
 if hasattr(settings, "REDIS_URI"):
     eve_conf["redis"] = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, password=settings.REDIS_PASSWORD, db=0)
 # Configure basic authentication
-if settings.USERNAME != None and  settings.PASSWORD != None:
+if settings.AUTH_USERNAME != None and  settings.AUTH_PASSWORD != None:
     eve_conf["auth"] = auth.BasicAuth 
 
 app = Eve(**eve_conf)

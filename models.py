@@ -3,7 +3,10 @@ vote = {
     'cache_control': 'max-age=10,must-revalidate',
     'cache_expires': 10,
     # Allow getting resources and create new ones
-    'resource_methods': ['GET', 'POST'],
+    'resource_methods': ['GET', 'POST', 'DELETE'],    
+    'item_methods': ['GET', 'DELETE'],
+    'public_methods': ['GET', 'POST'],
+    'public_item_methods': ['GET'],
     # Vote schema
     'schema':  {
         'media': {

@@ -12,12 +12,13 @@
     <link rel="stylesheet" href="http://bootswatch.com/superhero/bootstrap.css">    
 
     <script type="text/javascript">
-        window.API_URL = "http:/edj-stereopub.herokuapp.com/vote"
 
         function VoteCtrl($http, $scope) {
 
+            $scope.API_URL = "http:/localhost:5000/vote"
+
             $scope.load = function() {                
-                $http.get(API_URL + '?where=age==25').success(function(data) {
+                $http.get($scope.API_URL).success(function(data) {
                     $scope.votes = data 
                 });
             }
@@ -30,11 +31,18 @@
                     is_sexist: true    // La valeur du vote ("true" si le media est sexiste, "false" sinon)
                 }
 
-                $http.post(API_URL, vote).success(function(data) {
+                $http.post($scope.API_URL, vote).success(function(data) {
                     $scope.created = data;
                     $scope.load();
                 });
             };
+
+            $scope.remove = function(vote) {                
+                $http.delete($scope.API_URL + "/" + vote._id).success(function(data) {
+                    $scope.removed = data;
+                    $scope.load();
+                });
+            }
 
             $scope.load();
         }
@@ -52,9 +60,17 @@
         <div class="alert alert-success" ng-show="created">Le vote a été envoyé!</div>
 
         <div ng-show="votes">
-            <h2>Consulter les votes <span class="label label-info pull-right">{{votes.length}} vote{{ votes.length>1 ? "s" : ""}}</span></h2>
+            <h2>Consulter les votes <span class="label pull-right">{{votes.length}} vote{{ votes.length>1 ? "s" : ""}}</span></h2>
             <ul class="list-unstyled">
-                <li ng-repeat="vote in votes">
+                <li ng-repeat="vote in votes" class="panel">
+                    <div class="text-right">
+                        <a class="btn btn-default" ng-href="{{API_URL + '/' + vote._id}}" target="_blank">
+                            Permalink
+                        </a>
+                        <button class="btn btn-danger" ng-click="remove(vote)">
+                            Supprimer
+                        </button>
+                    </div>
                     <pre>{{vote|json}}</pre>
                 </li>
             </ul>
