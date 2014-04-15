@@ -23,7 +23,8 @@ XML             = False
 X_DOMAINS       = "*"
 X_HEADERS       = "X-Requested-With, content-type"
 # Disable pagination
-PAGINATION      = False
+PAGINATION      = True
+PAGINATION_LIMIT= PAGINATION_DEFAULT = 1000
 # Credidential
 AUTH_USERNAME   = environ.get('AUTH_USERNAME', None)
 AUTH_PASSWORD   = environ.get('AUTH_PASSWORD', None)
